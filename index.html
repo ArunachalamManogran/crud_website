@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD WEBISTE </title>
+</head>
+   <style>
+ body {
+  margin: 0;
+  font-family: sans-serif;
+  text-align: center; 
+  background-image: url("./vecteezy_abstract-blue-background-simple-design-for-your-website_6852804.jpg"); 
+  background-size: cover;        
+  background-position: center; 
+  background-repeat: no-repeat; 
+  height: 100vh;
+  overflow-y: hidden;
+  }
+  body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(123, 89, 161, 0.5);  /* black transparent layer */
+}
+
+#userform {
+  margin-top: 150px;    
+    position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 50px;  
+  color: rgb(234, 233, 238);
+  margin-bottom: 30px;
+}
+
+input {
+  display: block;       
+  width: 350px;
+  margin: 15px auto;    
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+button {
+  display: block;
+  width: 100px;
+  margin: 15px auto;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 15px;
+   cursor: pointer;
+  transition: 0.3s;
+}
+button:hover{
+
+     background-color: blueviolet;
+     color: white
+}
+
+#error{
+  font-size: 14px;
+  color: white;
+   margin-top: 8px;
+}
+
+
+   </style>
+<body>
+    <form id="userform">
+    <h1 class="heading">Login</h1>
+     <div class="form-box">
+        <input type="text" id="name" placeholder="Enter Name" required>
+        <input type="email" id="email" placeholder="Enter Email" required>
+        <button type="button" onclick ="login()">Login</button></div>
+        <p id="error"></p>
+    </form>
+
+<script>
+function login() {
+  const user = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+
+  const adminUser = "admin";
+  const adminemail= "admin@gmail.com";
+
+  if (user === adminUser && email === adminemail) {
+    window.location.href = "page_2.html"; 
+  } else {
+    document.getElementById("error").innerText = "Invalid Credentials!";
+  }
+}
+</script>
+
+</body>
+</html>
+
