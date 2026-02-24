@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD WEBISTE </title>
+</head>
+   <style>
+ body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center; 
+  background-image: url("./vecteezy_abstract-blue-background-simple-design-for-your-website_6852804.jpg"); 
+  background-size: cover;        
+  background-position: center; 
+  background-repeat: no-repeat; 
+  height: 100vh;
+  
+  }
+  body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(123, 89, 161, 0.5);  /* black transparent layer */
+}
+
+#userform {
+  margin-top: 100px;    
+    position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 42px;  
+  color: rgb(234, 233, 238);
+  margin-bottom: 30px;
+   letter-spacing: 2px;
+}
+
+input {
+  display: inline-block;       
+  width: 350px;
+  margin: 15px auto;    
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+button {
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100px;
+  margin: 15px auto;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 15px;
+   cursor: pointer;
+  transition: 0.3s;
+}
+button:hover{
+
+     background-color: blueviolet;
+     color: white
+}
+
+
+
+
+.form-row {
+  margin-top: 30px;
+}
+
+.form-row input,
+.form-row button {
+  width: 200px;
+  padding: 10px;
+  margin: 10px 5px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid gray;
+  display: inline-block;
+}
+
+
+.toast {
+  position: absolute;
+  width: max-content;
+  max-width: 90%;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -120%);
+  background-color: blueviolet;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  font-size: 18px;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+/* website--Table */
+table {
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  width: 80%;
+  margin: 40px auto;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid gray;
+  padding: 12px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.edit-btn {
+  padding: 5px 10px;
+  border-radius: 15px;
+  
+}
+
+
+.delete-btn{
+     padding: 5px 10px;
+     border-radius: 15px;
+     margin-left: 10px;
+     
+}
+
+
+
+
+td{
+    color: rgb(254, 254, 255);
+}
+th{
+    color:  rgb(98, 64, 131);
+}
+tbody tr:hover {
+  background-color: rgba(246, 143, 250, 0.1);
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {     /* media querris for reponsive website */ 
+
+  input {
+    width: 90%;
+    font-size: 16px;
+  }
+
+  button {
+    width: 90%;
+  }
+
+  table {
+    width: 95%;
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 8px;
+  }
+}
+@media(max-width:600px){
+  .toast{
+    top: -50px;
+    font-size: 13px;
+    padding: 10px 15px;
+  }
+}
+ 
+
+
+
+
+
+   </style>
+<body>
+    <form id="userform">
+    <h1 class="heading">Management</h1>
+     <div class="form-box">
+        <input type="text" id="name" placeholder="Enter Name" required>
+        <input type="email" id="email" placeholder="Enter Email" required>
+         <input type="tel" id="number" maxlength="10" placeholder="Enter Phone no" required>
+       <button type="submit" onclick="addUser(event)">Add User</button>
+       <div id="toast" class="toast"></div>
+        
+<table id="usertable">
+  <thead>
+    <tr>
+      <th>S.No</th>
+      <th>Name</th>
+      <th>Gmail</th>
+      <th>Phone No</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Luca</td>
+      <td>luca@gmail.com</td>
+      <td>9876543210</td>
+      <td><button class="edit-btn" onclick="editRow(this)">Edit</button><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+      
+    </tr>
+     <tr>
+      <td>2</td>
+      <td>Mando</td>
+      <td>mando@gmail.com</td>
+      <td>9876543210</td>
+      <td><button class="edit-btn" onclick="editRow(this)">Edit</button><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+    </tr>
+     <tr>
+      <td>3</td>
+      <td>Bruce</td>
+      <td>bruce@gmail.com</td>
+      <td>9876543210</td>
+      <td><button class="edit-btn" onclick="editRow(this)">Edit</button><button class="delete-btn"onclick="deleteRow(this)">Delete</button></td>
+    </tr>
+     <tr>
+      <td>4</td>
+      <td>Drake</td>
+      <td>drake@gmail.com</td>
+      <td>9876543210</td>
+      <td><button class="edit-btn" onclick="editRow(this)">Edit</button><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+    </tr>
+     <tr>
+      <td>5</td>
+      <td>Raiden</td>
+      <td>raiden@gmail.com</td>
+      <td>9876543210</td>
+      <td><button class="edit-btn" onclick="editRow(this)">Edit</button><button class="delete-btn"onclick="deleteRow(this)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+    </form>
+<script>
+  
+
+var tableBody = document.querySelector("tbody");
+
+
+ function showToast(message) {
+  var toast = document.getElementById("toast");
+  toast.innerText = message;
+  toast.classList.add("show");
+
+  setTimeout(function () {
+    toast.classList.remove("show");
+  }, 3000);
+}
+
+function addUser(event) {
+
+  event.preventDefault(); 
+
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var phone = document.getElementById("number").value;
+
+
+  if(name === "" || email === "" || phone === "") {
+    showToast("Please fill all fields");
+    return;
+  }
+
+
+  var phonePattern = /^[0-9]{10}$/;  /* to not let strings inside the numbers box*/
+   if (!phonePattern.test(phone))  {
+  showToast("Phone number must be exactly 10 digits Numbers");
+  return;
+}
+
+  var newRow = tableBody.insertRow();
+
+  newRow.innerHTML = `
+    <td>${tableBody.rows.length + 1}</td> 
+    <td>${name}</td>
+    <td>${email}</td>
+    <td>${phone}</td>
+    <td>
+      <button class="edit-btn" onclick="editRow(this)">Edit</button>
+      <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+    </td>
+  `;
+  updateSerialNumbers(); /* for update serial numbers in the table */
+
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("number").value = "";
+}
+
+function updateSerialNumbers() {
+  for (let i = 0; i < tableBody.rows.length; i++) {
+    tableBody.rows[i].cells[0].innerText = i + 1;
+  }
+}
+
+function deleteRow(button) {
+  var row = button.parentNode.parentNode;
+  row.remove();
+   updateSerialNumbers(); /* to delete serial numbers accoring to the rows in the table */
+}
+
+function editRow(button) {
+  var row = button.parentNode.parentNode;
+
+
+  
+
+  document.getElementById("name").value = row.cells[1].innerText;
+  document.getElementById("email").value = row.cells[2].innerText;
+  document.getElementById("number").value = row.cells[3].textContent;
+   
+  row.remove();
+
+ 
+}
+  
+
+
+</script>
+</body>
+</html> 
